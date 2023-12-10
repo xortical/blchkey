@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" Input ethereum private key and get address. Generate private key address pairs randomly.">
+    <meta name="keywords" content="Ethereum, private key, ethereum address">
+    <meta name="author" content="Blockchain Ball">
+    <title>Blockchain Ball</title>
+    <script src="ethers-v3.0.min.js"> const { ethers } = require('ethers');</script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <!-- Start Landing Page -->
+ <div class="landing-page">
+    <header>
+      <div class="container">
+        <a href="#" class="logo">Blockchain <b>Ball</b></a>
+      </div>
+    </header>
+    <div class="content">
+      <div class="container">
+        <div class="info">
+          <h1>Have a private key? Paste the private key and Get Address</h1>
+
+          <p></p>
+          <form name = "userInput" method="POST" data-netlify="true">
+          <input class = "get-private-key get-private-key-style" 
+           value="4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d"
+           placeholder = "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d">
+          </form>
+
+          <button onclick = "getAddress();">Generate Address</button>
+
+          <p class="display-address">Address: </p>
+          <button onclick="ethscan()">Check Wallet on Etherscan</button>
+
+          <h3> You could also try your luck by guessing a private key.
+            The chances are near zero to get a wallet with balance. But please consider splitting the spoils with me (0x80533F540dBc2D024433b3f7a1E80D5eF15E54D3) if you find one.
+          </h3>
+            </p>
+            <button onclick = "generateRandomWallet();"> Random Private Key</button>
+            <p class="display-random-privkey">Your random private key:</p>
+            <p class="display-random-address">Associated wallet:</p>
+          
+            <button onclick="ethscan()">Check Wallet on Etherscan</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- End Landing Page -->
+    
+  <script>
+    let privKey;
+    let addr;
+
+    function getAddress(){
+        privKey = document.querySelector('.get-private-key').value;
+        if(privKey.length ==  64){
+            privKey = '0x'+privKey;
+        };
+        
+        addr = new ethers.Wallet(privKey).address;
+        const addrElement = document.querySelector('.display-address');
+        addrElement.innerHTML = `Address: ${addr}`;
+        console.log(addr);
+    }
+    function generateRandomWallet(){
+        const wallet = ethers.Wallet.createRandom();
+        const privElement = document.querySelector('.display-random-privkey');
+        const addrElement = document.querySelector('.display-random-address');
+        privElement.innerHTML = `Your lottery private key: ${wallet.privateKey}`
+        addrElement.innerHTML = `Your lottery wallet: ${wallet.address}`;
+        privKey = wallet.privateKey;
+        addr = wallet.address;
+        //console.log('address:', wallet.address);
+        //console.log('privateKey:', wallet.privateKey);
+    }
+
+    function ethscan(){
+        window.open(`https://etherscan.io/address/${addr}`);
+    }
+
+</script>
+</body>
+</html>
