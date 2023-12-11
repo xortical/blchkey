@@ -24,13 +24,12 @@
           <h1>Have a private key? Paste the private key and Get Address</h1>
 
           <p></p>
-          <form name = "userInput" method="POST" data-netlify="true">
+          <form name = "userInput" action="javascript:void(0);" method="POST" data-netlify="true">
           <input class = "get-private-key get-private-key-style" 
            value="4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d"
            placeholder = "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d">
-          </form>
-
           <button onclick = "getAddress();">Generate Address</button>
+          </form>
 
           <p class="display-address">Address: </p>
           <button onclick="ethscan()">Check Wallet on Etherscan</button>
