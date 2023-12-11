@@ -24,7 +24,13 @@
           <h1>Have a private key? Paste the private key and Get Address</h1>
 
           <p></p>
-          <form name = "userInput" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+          <form 
+          name = "userInput" 
+          method="POST" 
+          netlify-honeypot="bot-field" 
+          data-netlify="true"
+          onsubmit="return false">
+
             <p hidden aria-hidden="true">
               <label>Don't fill out this input. <input name="bot-field" /></label>
             </p>
